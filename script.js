@@ -1,7 +1,7 @@
 var lowerCase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var upperCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']; 
-var numeric = [1,2,3,4,5,6,7,8,9,0]; 
-var specialChar = ['!','@','!','"','#','$','%','&','(',')','*','+','-','.','/',':',';','<','>','?'];
+var numeric = ['1','2','3','4','5','6','7','8','9','0']; 
+var specialChar = ['!','@','#','$','%','&','(',')','*','+','-','.','/',':',';','<','>','?'];
 
 var selectedTypes = [];
 console.log(selectedTypes);
@@ -17,16 +17,18 @@ function passCriteria() {
   var inclSpecial = window.confirm("Do you want special characters?");
 
   if(inclLower){
-    selectedTypes += lowerCase;
+    selectedTypes.push(lowerCase);
+    console.log(lowerCase);
   } 
   if(inclUpper){
-    selectedTypes += upperCase; 
+    selectedTypes.push(upperCase); 
+    console.log(upperCase);
   }
   if(inclNum){
-    selectedTypes += numeric; 
+    selectedTypes.push(numeric); 
   }
   if (inclSpecial){
-    selectedTypes += specialChar; 
+    selectedTypes.push(specialChar); 
   }
   return(numChars);
 }
@@ -46,12 +48,15 @@ function genChar(numChars) {
   var finalString = ''; 
 
   for (i=0; i < numChars; i++) {
-    finalString += selectedTypes[Math.floor(Math.random() * selectedTypes.length)];
-  }
+    //Potential issue 1
+    finalString.push(selectedTypes[Math.floor(Math.random() * selectedTypes.length)]);
+  } 
+  console.log(finalString);
   return finalString; 
 }
 
 //Return final concatenated string 
+//Potential issue 2
 function generatePassword() {
   var passLength = passCriteria();
   console.log(passLength);
